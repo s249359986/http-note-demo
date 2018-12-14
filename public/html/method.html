@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>http方法</title>
+		<style>
+		#contentId{
+			overflow: hidden;
+			width: 1394px;
+		}
+
+		img{
+			display: block;
+			float: left;
+		}
+		</style>
+	</head>
+	<body>
+
+		<div id='contentId'>
+		</div>
+
+<script src="../javascripts/jq.min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var count = 0
+			//var methodArray = ['get','post','delete','put','options','trace','connect','head']
+			var methodArray = ['get','post','delete','put','options','head']
+			// var methodArray = ['get']
+let str =''
+
+function loadText(text){
+$('#contentId').html(text)
+}
+			function req(method){
+				$.ajax({url:'/method/order',type:method,data:{id:1},success:function(data){
+					console.log('data:',data)
+					 str += method+'方法返回值'+ JSON.stringify(data) +'<br>'  //$('#contentId').text()
+					 count++
+					 if(count > methodArray.length-1){
+						 loadText(str)
+					 }
+				},error:function(data){
+					console.log('data:',data)
+					str +=  "错误"+JSON.stringify(data) +'<br>'  //$('#contentId').text()
+ 				 count++
+ 				 if(count > methodArray.length-1){
+ 					 loadText(str)
+ 				 }
+				}})
+			}
+
+
+for(let i=0;i<methodArray.length;i++){
+req(methodArray[i])
+}
+
+		});
+
+		</script>
+
+	</body>
+</html>

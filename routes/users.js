@@ -13,11 +13,7 @@ function getMd5(path){
 
 }
 
-/* GET users listing. */
-// router.use(function timeLog (req, res, next) {
-//   console.log('Time: ', new Date())
-//   next()
-// })
+
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname,'../public/html/bj.html'))
 });
@@ -34,7 +30,7 @@ getMd5(cssPath).then(function(data){
       // getMd5(cssPath).then(function(data){
         res.set('ETag',data)
         setTimeout(function(){
-          // res.setHeader('Cache-Control','no-cache')
+          res.setHeader('Cache-Control','private')
           res.end(content)
         },5000)
       })

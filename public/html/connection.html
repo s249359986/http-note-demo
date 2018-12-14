@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>持久链接</title>
+		<style>
+		#contentId{
+			overflow: hidden;
+			width: 1394px;
+		}
+
+		img{
+			display: block;
+			float: left;
+		}
+		</style>
+	</head>
+	<body>
+
+		<div id='contentId'>
+		</div>
+
+<!-- <script src="../javascripts/jq.min.js"></script> -->
+		<script type="text/javascript">
+		// $(document).ready(function(){
+			var str = ''
+			let count = 1
+
+			function loadImg(url){
+				let img = new Image()
+				img.onload=function(){
+					count++
+					if(count > 4){
+					str = '/imgClose/?id=' + count
+				}else{
+					str = '/img/?id=' + count
+				}
+					setTimeout(function(){
+					loadImg(str)
+				},500)
+
+					document.getElementById("contentId").appendChild(img)
+				}
+				img.onerror=function(){
+					console.timeEnd()
+				}
+				img.src = url
+			}
+			console.time()
+			loadImg('/img/?id='+count)
+
+
+
+
+			// $.ajax({url:'/img/',id:'1',success:function(data){
+			// 	console.log('data:',data)
+			// },error:function(data){
+			// 	console.log('data:',data)
+			// }})
+
+
+			// $.get('/img/',{id:'1'},function(data){
+			// 	console.log('data:',data)
+			// })
+
+
+
+
+
+
+		// });
+
+		</script>
+
+	</body>
+</html>
